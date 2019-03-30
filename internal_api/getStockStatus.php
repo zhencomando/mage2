@@ -43,7 +43,7 @@ foreach ($collection as $product) {
 
     $itemPending = 0;
     $itemProcess = 0;
-    $itemComplete = 0;
+    //$itemComplete = 0;
     $totalQty = $productStockObj->getQty();
 
     foreach ($orderCollection as $order) {
@@ -55,15 +55,15 @@ foreach ($collection as $product) {
 					$itemPending += $item->getQtyOrdered();
 				}else if($order->getStatus() == 'processing'){
 					$itemProcess += $item->getQtyOrdered();
-				}else if($order->getStatus() == 'complete'){
+				}/*else if($order->getStatus() == 'complete'){
 					$itemComplete += $item->getQtyOrdered();
-				}
+				}*/
 			   
 			} 
 		}
        
     }
-    $totalQty += $itemPending + $itemProcess + $itemComplete;
+    $totalQty += $itemPending + $itemProcess;
     
     
     $productData = array();
@@ -73,7 +73,7 @@ foreach ($collection as $product) {
     $productData['qty_available'] = $productStockObj->getQty();
     $productData['qty_pending'] = $itemPending;
     $productData['qty_processing'] = $itemProcess;
-    $productData['qty_complete'] = $itemComplete;
+    //$productData['qty_complete'] = $itemComplete;
     $dataArray[] = $productData;
   	
 } 
